@@ -1,3 +1,3 @@
 public class Item {
 
-String s = "Fuck you dorin";}
+String s = "Fuck you ELLLAADDDD";}
