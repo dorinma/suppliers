@@ -1,28 +1,36 @@
+import javafx.util.Pair;
+
+import java.util.LinkedList;
 import java.util.List;
 
 public class Order {
     int id;
     List<ItemInOrder> items;
-    Supplier supplierId;
+    Supplier supplier;
 
-    public Order(int id,List<Integer> items,int supplierId)
+    public Order(int id, List<Pair<Integer, Integer>> items, int supplierId)
     {
         this.id=id;
         this.items=makeItemsInOrder(items);
-        this.supplierId=getSuppById(id);
+        this.supplier=getSuppById(id);
     }
     public Supplier getSuppById(int id)
     {
         return SupplierController.getSuppById(id);
     }
-    public List<ItemInOrder> makeItemsInOrder(List<Integer> items)
+    public List<ItemInOrder> makeItemsInOrder(List<Pair<Integer, Integer>> items)
     {
-        return null;
+        List<ItemInOrder> list= new LinkedList<>();
+        for (int i=0 ; i<items.size();i++)
+        {
+            //int cost_item=supplier.getCostOfItem(items.get(i).getKey());
+            ItemInOrder a = new ItemInOrder(items.get(i).getKey(),items.get(i).getValue());
+            list.add(a);
+        }
+        return list;
     }
 
-
-
     public boolean makeOrder() {
-        return true;
+        return supplier.makeOrder(items);
     }
 }

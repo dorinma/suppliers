@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 import java.util.List;
 
 public class FacadeController {
@@ -27,7 +29,7 @@ public class FacadeController {
         supplierController.addBillOfQuantities(id,supplierId,itemId,supplierId,discount);
     }
 
-    public boolean addOrder(int id,List<Integer> items,int supplierId)
+    public boolean addOrder(int id, List<Pair<Integer, Integer>> items, int supplierId)
     {
         return orderController.addOrder(id,items, supplierId);
     }
