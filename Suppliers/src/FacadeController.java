@@ -16,7 +16,7 @@ public class FacadeController {
     }
     public void addSupplier(int id, String name, int phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Item> items)
     {
-        supplyLocation.addSupplier(id,name,phoneNum,bankAccount,payment,supplyScedule,supplyLocation,items);
+        supplierController.addSupplier(id,name,phoneNum,bankAccount,payment,supplyScedule,supplyLocation,items);
     }
     public void addAgreement (int id , int supplierId,String terms,int quantitiesId)
     {
@@ -27,7 +27,7 @@ public class FacadeController {
         supplierController.addBillOfQuantities(id,supplierId,itemId,supplierId,discount);
     }
 
-    public boolean addOrder(int id,List<ItemInOrder> items,int supplierId)
+    public boolean addOrder(int id,List<Integer> items,int supplierId)
     {
         return orderController.addOrder(id,items, supplierId);
     }
