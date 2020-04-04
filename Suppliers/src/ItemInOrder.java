@@ -1,8 +1,8 @@
 public class ItemInOrder {
 
-    int supplierId;
-    int itemId;
-    int quantity;
+    private int supplierId;
+    private int itemId;
+    private int quantity;
 
     public ItemInOrder(int itemId,int quantity)
     {
@@ -11,5 +11,11 @@ public class ItemInOrder {
         this.quantity=quantity;
     }
 
+    public int getItemId() {
+        return itemId;
+    }
 
+    public int getQuantity() {
+        return quantity;
+    }
 }

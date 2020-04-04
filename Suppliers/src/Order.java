@@ -1,5 +1,4 @@
 import javafx.util.Pair;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class Order {
     {
         return SupplierController.getSuppById(id);
     }
+
     public List<ItemInOrder> makeItemsInOrder(List<Pair<Integer, Integer>> items)
     {
         List<ItemInOrder> list= new LinkedList<>();
