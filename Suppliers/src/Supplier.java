@@ -13,7 +13,7 @@ public class Supplier {
     private List<Pair<Item, Integer>> items;
     private Agreement agreement;
 
-    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation) {
+    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation,List<Pair<Integer,Integer>> agreement) {
         this.id = id;
         this.name = name;
         this.phoneNum = phoneNum;
@@ -22,20 +22,9 @@ public class Supplier {
         this.supplySchedule = supplySchedule;
         this.supplyLocation = supplyLocation;
         this.items = new LinkedList<>();
-        this.agreement = new Agreement(id, "None");
+        this.agreement = new Agreement(agreement);
     }
 
-    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items) {
-        this.id = id;
-        this.name = name;
-        this.phoneNum = phoneNum;
-        this.bankAccount = bankAccount;
-        this.payment = payment;
-        this.supplySchedule = supplySchedule;
-        this.supplyLocation = supplyLocation;
-        this.items = items;
-        this.agreement = new Agreement(id, "None");
-    }
 
     public int getId() { return this.id; }
 
@@ -91,7 +80,7 @@ public class Supplier {
         return true;
     }
 
-    public int getPriceOfItem(int id){
+    public double getPriceOfItem(double id){
         for (int i=0; i< items.size(); i++) {
             if(items.get(i).getKey().getId() == id)
                 return items.get(i).getKey().getPrice();
@@ -99,4 +88,11 @@ public class Supplier {
         return -1;
     }
 
+    public void updateBillOfQuantities( Integer itemId, Pair<Integer, Integer> quantity_disc) {
+        this.agreement.updateBillOfQuantities(itemId,quantity_disc);
+    }
+
+    public void deleteBillOfQuantities(Integer itemId) {
+        this.agreement.deleteBillOfQuantities(itemId);
+    }
 }

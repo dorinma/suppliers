@@ -1,12 +1,10 @@
 public class ItemInOrder {
 
-    private int supplierId;
     private int itemId;
     private int quantity;
 
     public ItemInOrder(int itemId,int quantity)
     {
-       // this.supplierId=supplierId;
         this.itemId=itemId;
         this.quantity=quantity;
     }

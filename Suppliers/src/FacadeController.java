@@ -1,33 +1,50 @@
 import javafx.util.Pair;
 
 import java.util.List;
+import java.util.Map;
 
 public class FacadeController {
+
+    private static FacadeController fc_instance=null;
     SupplierController supplierController;
     OrderController orderController;
 
     private FacadeController()
     {
-        this.supplierController=new SupplierController();
-        this.orderController = new OrderController();
+        this.supplierController=SupplierController.getSupplierController();
+        this.orderController =OrderController.getOrderController();
     }
-    public FacadeController getFacadeController()
+    public static FacadeController getFacadeController()
     {
-        if(this.supplierController==null) return new FacadeController();
-        else return this;
+        if(fc_instance==null) fc_instance=new FacadeController();
+         return fc_instance;
     }
-    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Item> items)
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Pair<Item, Integer>> items)
     {
         supplierController.addSupplier(id,name,phoneNum,bankAccount,payment,supplyScedule,supplyLocation,items);
     }
-    public void addAgreement (int id , int supplierId,String terms,int quantitiesId)
+    public void addBillOfQuantities (int supplierId,Map<Integer, Pair<Integer, Integer>> bill )
     {
-        supplierController.addAgreement(id,supplierId,terms,quantitiesId);
+        supplierController.addBillOfQuantities(supplierId,bill);
     }
-    public void addBillOfQuantities (int id , int itemId,int supplierId,int quantity,int discount)
+    public void insertBillOfQuantities(int supplierId,Integer itemId, Pair<Integer, Integer> quantity_disc)
     {
-        supplierController.addBillOfQuantities(id,supplierId,itemId,supplierId,discount);
+        this.supplierController.insertBillOfQuantities(supplierId,itemId,quantity_disc);
     }
+
+    public void updateBillOfQuantities(int supplierId,Integer itemId, Pair<Integer, Integer> quantity_disc)
+    {
+        this.supplierController.updateBillOfQuantities(supplierId,itemId,quantity_disc);
+    }
+
+    public void deleteBillOfQuantities(int supplierId,Integer itemId)
+    {
+        this.supplierController.deleteBillOfQuantities(supplierId,itemId);
+    }
+
+
+
+
 
     public boolean addOrder(int id, List<Pair<Integer, Integer>> items, int supplierId)
     {

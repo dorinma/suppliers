@@ -15,7 +15,7 @@ public class Order {
     }
     public Supplier getSuppById(int id)
     {
-        return SupplierController.getSuppById(id);
+        return SupplierController.getSupplierController().getSuppById(id);
     }
 
     public List<ItemInOrder> makeItemsInOrder(List<Pair<Integer, Integer>> items)
