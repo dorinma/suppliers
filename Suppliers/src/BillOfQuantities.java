@@ -1,16 +1,12 @@
+import javafx.util.Pair;
+
+import java.util.Map;
+
 public class BillOfQuantities {
 
-    private int id;
-    private int itemId;
-    private int supplierId;
-    private int quantity;
-    private int discount;
+    private Map<Integer, Pair<Integer, Integer>> bill;
 
-    public BillOfQuantities(int id, int itemId, int supplierId, int quantity, int discount) {
-        this.id = id;
-        this.itemId = itemId;
-        this.supplierId = supplierId;
-        this.quantity = quantity;
-        this.discount = discount;
+    public BillOfQuantities(Map<Integer, Pair<Integer, Integer>> bill) {
+        this.bill = bill;
     }
 }

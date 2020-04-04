@@ -1,7 +1,7 @@
 public class Item {
     private int id;
     private String name;
-    private int price;
+    private double price;
     private String description;
 
     public Item(int id, String name, int price, String description) {
@@ -13,5 +13,5 @@ public class Item {
 
     public int getId() { return this.id; }
 
-    public int getPrice() { return this.price; }
+    public double getPrice() { return this.price; }
 }

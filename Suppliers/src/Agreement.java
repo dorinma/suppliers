@@ -1,21 +1,20 @@
+import javafx.util.Pair;
+
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Agreement {
 
-    private int id; //=supplierId
     private String terms;
-    private List<BillOfQuantities> quantities;
+    private BillOfQuantities bill;
 
-    public Agreement(int id, String terms) {
-        this.id = id;
+    public Agreement(String terms) {
         this.terms = terms;
-        this.quantities = new LinkedList<>();
+        this.bill = null;
     }
 
-    public void addBillOfQuantities(int itemId, int quantity, int discount) {
-        int id = quantities.size();
-        BillOfQuantities boq = new BillOfQuantities(id, itemId, this.id, quantity, discount);
-        this.quantities.add(boq);
+    public void addBillOfQuantities(Map<Integer, Pair<Integer, Integer>> bill) {
+        this.bill = bill;
     }
 }

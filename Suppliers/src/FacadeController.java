@@ -16,7 +16,7 @@ public class FacadeController {
         if(this.supplierController==null) return new FacadeController();
         else return this;
     }
-    public void addSupplier(int id, String name, int phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Item> items)
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Item> items)
     {
         supplierController.addSupplier(id,name,phoneNum,bankAccount,payment,supplyScedule,supplyLocation,items);
     }
