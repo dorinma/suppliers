@@ -29,8 +29,8 @@ public class SupplierController {
         return null;
     }
 
-    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Integer,Integer>> items) {
-        Supplier sup = new Supplier(id, name, phoneNum, bankAccount, payment, supplySchedule, supplyLocation, items);
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items,List<Pair<Integer,Integer>> agreement) {
+        Supplier sup = new Supplier(id, name, phoneNum, bankAccount, payment, supplySchedule, supplyLocation, items,agreement);
         this.suppliers.add(sup);
     }
 

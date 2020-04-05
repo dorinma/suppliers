@@ -17,11 +17,11 @@ public class FacadeController {
     public static FacadeController getFacadeController()
     {
         if(fc_instance==null) fc_instance=new FacadeController();
-         return fc_instance;
+        return fc_instance;
     }
-    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Pair<Item, Integer>> items)
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Pair<Item, Integer>> items,List<Pair<Integer,Integer>> agreement)
     {
-        supplierController.addSupplier(id,name,phoneNum,bankAccount,payment,supplyScedule,supplyLocation,items);
+        supplierController.addSupplier(id,name,phoneNum,bankAccount,payment,supplyScedule,supplyLocation,items,agreement);
     }
     public void addBillOfQuantities (int supplierId,Map<Integer, Pair<Integer, Integer>> bill )
     {
@@ -41,9 +41,6 @@ public class FacadeController {
     {
         this.supplierController.deleteBillOfQuantities(supplierId,itemId);
     }
-
-
-
 
 
     public boolean addOrder(int id, List<Pair<Integer, Integer>> items, int supplierId)

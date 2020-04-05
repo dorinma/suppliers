@@ -13,7 +13,7 @@ public class Supplier {
     private List<Pair<Item, Integer>> items;
     private Agreement agreement;
 
-    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation,List<Pair<Integer,Integer>> agreement) {
+    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation,List<Pair<Item, Integer>> items,List<Pair<Integer,Integer>> agreement) {
         this.id = id;
         this.name = name;
         this.phoneNum = phoneNum;
@@ -21,7 +21,7 @@ public class Supplier {
         this.payment = payment;
         this.supplySchedule = supplySchedule;
         this.supplyLocation = supplyLocation;
-        this.items = new LinkedList<>();
+        this.items = items;
         this.agreement = new Agreement(agreement);
     }
 
@@ -80,13 +80,13 @@ public class Supplier {
         return true;
     }
 
-    public double getPriceOfItem(double id){
+   /* public double getPriceOfItem(double id){
         for (int i=0; i< items.size(); i++) {
             if(items.get(i).getKey().getId() == id)
                 return items.get(i).getKey().getPrice();
         }
         return -1;
-    }
+    }*/
 
     public void updateBillOfQuantities( Integer itemId, Pair<Integer, Integer> quantity_disc) {
         this.agreement.updateBillOfQuantities(itemId,quantity_disc);

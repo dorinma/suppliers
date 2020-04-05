@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class Agreement {
 
-    private List<Pair<Integer,Integer>> terms;
+    private List<Pair<Integer,Double>> terms;
     private BillOfQuantities bill;
 
-    public Agreement(List<Pair<Integer,Integer>> terms) {
+    public Agreement(List<Pair<Integer,Double>> terms) {
         this.terms = terms;
         this.bill = null;
     }
