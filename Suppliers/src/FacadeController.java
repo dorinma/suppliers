@@ -19,20 +19,20 @@ public class FacadeController {
         if(fc_instance==null) fc_instance=new FacadeController();
         return fc_instance;
     }
-    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Pair<Item, Integer>> items,List<Pair<Integer,Integer>> agreement)
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplyScedule, String supplyLocation, List<Pair<Item, Integer>> items,Map<Integer, Double> agreement)
     {
         supplierController.addSupplier(id,name,phoneNum,bankAccount,payment,supplyScedule,supplyLocation,items,agreement);
     }
-    public void addBillOfQuantities (int supplierId,Map<Integer, Pair<Integer, Integer>> bill )
+    public void addBillOfQuantities (int supplierId,Map<Integer, Pair<Integer, Double>> bill )
     {
         supplierController.addBillOfQuantities(supplierId,bill);
     }
-    public void insertBillOfQuantities(int supplierId,Integer itemId, Pair<Integer, Integer> quantity_disc)
+    public void insertBillOfQuantities(int supplierId,Integer itemId, Pair<Integer, Double> quantity_disc)
     {
         this.supplierController.insertBillOfQuantities(supplierId,itemId,quantity_disc);
     }
 
-    public void updateBillOfQuantities(int supplierId,Integer itemId, Pair<Integer, Integer> quantity_disc)
+    public void updateBillOfQuantities(int supplierId,Integer itemId, Pair<Integer, Double> quantity_disc)
     {
         this.supplierController.updateBillOfQuantities(supplierId,itemId,quantity_disc);
     }

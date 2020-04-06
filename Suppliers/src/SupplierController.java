@@ -29,19 +29,19 @@ public class SupplierController {
         return null;
     }
 
-    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items,List<Pair<Integer,Integer>> agreement) {
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items,Map<Integer, Double> agreement) {
         Supplier sup = new Supplier(id, name, phoneNum, bankAccount, payment, supplySchedule, supplyLocation, items,agreement);
         this.suppliers.add(sup);
     }
 
-    public void addBillOfQuantities(int supplierId,Map<Integer, Pair<Integer, Integer>> bill) {
+    public void addBillOfQuantities(int supplierId,Map<Integer, Pair<Integer, Double>> bill) {
         if(getSuppById(supplierId)!=null)
         {
             getSuppById(supplierId).getAgreement().addBillOfQuantities(bill);
         }
     }
 
-    public void insertBillOfQuantities(int supplierId, Integer itemId, Pair<Integer, Integer> quantity_disc) {
+    public void insertBillOfQuantities(int supplierId, Integer itemId, Pair<Integer, Double> quantity_disc) {
 
         if(getSuppById(supplierId)!=null)
         {
@@ -49,7 +49,7 @@ public class SupplierController {
         }
     }
 
-    public void updateBillOfQuantities(int supplierId, Integer itemId, Pair<Integer, Integer> quantity_disc) {
+    public void updateBillOfQuantities(int supplierId, Integer itemId, Pair<Integer, Double> quantity_disc) {
        if(getSuppById(supplierId)!=null)
        {
            getSuppById(supplierId).updateBillOfQuantities(itemId,quantity_disc);

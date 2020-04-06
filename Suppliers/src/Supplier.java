@@ -1,5 +1,7 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 import javafx.util.Pair;
 
 public class Supplier {
@@ -13,7 +15,7 @@ public class Supplier {
     private List<Pair<Item, Integer>> items;
     private Agreement agreement;
 
-    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation,List<Pair<Item, Integer>> items,List<Pair<Integer,Integer>> agreement) {
+    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items, Map<Integer, Double> agreement) {
         this.id = id;
         this.name = name;
         this.phoneNum = phoneNum;
@@ -96,7 +98,7 @@ public class Supplier {
         return -1;
     }*/
 
-    public void updateBillOfQuantities( Integer itemId, Pair<Integer, Integer> quantity_disc) {
+    public void updateBillOfQuantities( Integer itemId, Pair<Integer, Double> quantity_disc) {
         this.agreement.updateBillOfQuantities(itemId,quantity_disc);
     }
 
