@@ -63,8 +63,7 @@ public class Main {
                     System.out.print("Supplier's id: ");
                     temp = scanner.nextLine();
                     int suppId = Integer.parseInt(temp);
-                    Supplier supplier = fc.supplierController.getSuppById(suppId);
-                    if(supplier != null) {
+                    if(fc.supplierController.getSuppById(suppId) != null) {
                         System.out.println("Please choose a function:");
                         System.out.println("1. Add items");
                         System.out.println("2. Edit agreement");
@@ -79,6 +78,16 @@ public class Main {
                                 while (addItems.equals("Y") | addItems.equals("y")) {
                                     addItems(items);
                                     addItems = scanner.nextLine();
+                                }
+                                
+                                if(items.size() > 0) {
+                                    System.out.println("Please insert supplier's agreement (for each item insert it's cost).");
+                                    for (int i = 0; i < items.size(); i++) {
+                                        System.out.print(items.get(i).getKey().getName() + ": ");
+                                        temp = scanner.nextLine();
+                                        double itemPrice = Integer.parseInt(temp);
+                                        agreement.put(items.get(i).getKey(), itemPrice);
+                                    }
                                 }
                                 break;
                             case "2":
