@@ -29,4 +29,8 @@ public class Agreement {
     public void deleteBillOfQuantities(Integer itemId) {
         this.bill.deleteBillOfQuantities(itemId);
     }
+
+    public void insertItem(Integer item_id, Double cost) {
+        terms.put(item_id,cost);
+    }
 }

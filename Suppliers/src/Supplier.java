@@ -105,4 +105,8 @@ public class Supplier {
     public void deleteBillOfQuantities(Integer itemId) {
         this.agreement.deleteBillOfQuantities(itemId);
     }
+
+    public void addItemToAgreement(Integer item_id, Double cost) {
+        this.agreement.insertItem(item_id,cost);
+    }
 }

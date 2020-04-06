@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         String choice = "", temp = "";
-        boolean exit = false;
+        boolean exit = false, backToMenu = false;
         FacadeController fc = FacadeController.getFacadeController();
         System.out.println("Hello!");
         do {
@@ -55,11 +55,13 @@ public class Main {
                         }
                     }
                     //add bill of quantities
-                    fc.supplierController.addSupplier(supplierIdCounter++, suppName, suppPhone, suppBankAccount, suppPayment,
+                    fc.supplierController.addSupplier(supplierIdCounter, suppName, suppPhone, suppBankAccount, suppPayment,
                             suppSchedule, suppLocation, items, agreement);
-                    System.out.println("Supplier added successfully.");
+                    System.out.println("Supplier added successfully. Id is: " + supplierIdCounter);
+                    supplierIdCounter++;
                     break;
                 case "2":
+                    do{
                     System.out.print("Supplier's id: ");
                     temp = scanner.nextLine();
                     int suppId = Integer.parseInt(temp);
@@ -70,37 +72,39 @@ public class Main {
                         System.out.println("3. Add bill of quantities");
                         System.out.println("4. Edit bill of quantities");
                         System.out.println("5. Main menu");
+                        System.out.print("Option: ");
                         choice = scanner.nextLine();  // Read user input
                         switch (choice) {
                             case "1":
                                 items = new LinkedList();
-                                addItems = scanner.nextLine();
+                                addItems = "Y";
+                                int index = items.size();
                                 while (addItems.equals("Y") | addItems.equals("y")) {
                                     addItems(items);
                                     addItems = scanner.nextLine();
                                 }
-                                
-                                if(items.size() > 0) {
+                                if (items.size() > 0) {
                                     System.out.println("Please insert supplier's agreement (for each item insert it's cost).");
-                                    for (int i = 0; i < items.size(); i++) {
+                                    for (int i = index; i < items.size(); i++) {
                                         System.out.print(items.get(i).getKey().getName() + ": ");
                                         temp = scanner.nextLine();
                                         double itemPrice = Integer.parseInt(temp);
-                                        agreement.put(items.get(i).getKey(), itemPrice);
+                                        fc.supplierController.addItemToAgreement(suppId, items.get(i).getKey().getId(), itemPrice);
                                     }
                                 }
                                 break;
                             case "2":
-
                                 break;
                             case "3":
                                 break;
                             case "4":
                                 break;
                             case "5":
+                                backToMenu = true;
                                 break;
                         }
                     }
+                    }while (!backToMenu);
                     break;
                 case "3":
                     break;
@@ -129,5 +133,14 @@ public class Main {
         Item item = new Item(itemId, itemName, itemDescription);
         items.add(new Pair(item, itemQuantity));
         System.out.print("Insert more items? [Y/N]");
+    }
+
+    private static void option1()
+    {
+        
+
+
+
+
     }
 }

@@ -40,6 +40,11 @@ public class SupplierController {
             getSuppById(supplierId).getAgreement().addBillOfQuantities(bill);
         }
     }
+    public void addItemToAgreement(Integer supp_id ,Integer item_id,Double cost)
+    {
+        getSuppById(supp_id).addItemToAgreement(item_id,cost);
+    }
+
 
     public void insertBillOfQuantities(int supplierId, Integer itemId, Pair<Integer, Double> quantity_disc) {
 
