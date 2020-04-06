@@ -70,12 +70,20 @@ public class Supplier {
 */
 
     public boolean makeOrder(List<ItemInOrder> items) {
-        for(int i=0; i<items.size(); i++) {
-            if(!this.items.contains((items.get(i))))
-                return false;
-            if(this.items.get(i).getKey().equals(items.get(i)) &&
-                this.items.get(i).getValue() < items.get(i).getQuantity())
-                return false;
+        int counter = 0;
+        for (int i = 0; i < items.size(); i++) {
+            if (this.items.get(i).getKey().getId() == items.get(i).getItemId()) {
+                if (this.items.get(i).getValue() >= items.get(i).getQuantity())
+                    counter++;
+            }
+        }
+        if (counter != items.size()) return false;
+        for (int i = 0; i < items.size(); i++) {
+            if (this.items.get(i).getKey().getId() == items.get(i).getItemId()) {
+                Pair<Item, Integer> p = new Pair(this.items.get(i), this.items.get(i).getValue() - items.get(i).getQuantity());
+                this.items.remove(i);
+                this.items.add(p);
+            }
         }
         return true;
     }

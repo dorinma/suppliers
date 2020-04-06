@@ -1,15 +1,14 @@
 import javafx.util.Pair;
 
 import java.util.List;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class Agreement {
 
-    private List<Pair<Integer,Double>> terms;
+    private List<Pair<Integer, Integer>> terms;
     private BillOfQuantities bill;
 
-    public Agreement(List<Pair<Integer,Double>> terms) {
+    public Agreement(List<Pair<Integer, Integer>> terms) {
         this.terms = terms;
         this.bill = null;
     }

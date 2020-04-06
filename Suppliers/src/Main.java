@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
-  public void main(String []args)
+    public static void main(String[] args)
   {
       FacadeController fc = FacadeController.getFacadeController();
       List<Pair<Item,Integer>> list = new LinkedList();
