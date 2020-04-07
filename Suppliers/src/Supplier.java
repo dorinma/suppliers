@@ -65,8 +65,33 @@ public class Supplier {
     public List<Item> getItems() {
         LinkedList items = new LinkedList();
         for(int i=0; i < this.items.size(); i++){
-            items.add(this.items.get(i));
+            items.add(this.items.get(i).getKey());
         }
         return items;
+    }
+
+    public double getPriceOfItem(int index) {
+        return  this.agreement.getPriceOfItem(index);
+    }
+
+    public Boolean checkBillOfQuantity() {
+        return this.agreement.checkBillOfQuantity();
+    }
+
+    public void addItemToBillOfQuantity(int itemId, int item_quantity, Double item_disscount) {
+        this.agreement.addItemToBillOfQuantity(itemId,item_quantity,item_disscount);
+    }
+
+    public Map<Integer, Pair<Integer, Double>> getbillOfQuantities() {
+        return this.agreement.getbillOfQuantities();
+    }
+
+    public String getItemName(Integer itemId) {
+        for(Pair<Item,Integer> item:items)
+        {
+            if(item.getKey().getId()==itemId) return item.getKey().getName();
+            break;
+        }
+        return "";
     }
 }

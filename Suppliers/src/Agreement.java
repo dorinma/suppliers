@@ -37,4 +37,22 @@ public class Agreement {
     public void setPrice(int id, double newPrice) {
         terms.replace(id, newPrice);
     }
+
+    public double getPriceOfItem(int index) {
+        return terms.get(index);
+    }
+
+    public Boolean checkBillOfQuantity() {
+        if(this.bill==null) return false;
+        return true;
+    }
+
+    public void addItemToBillOfQuantity(int itemId, int item_quantity, Double item_disscount) {
+        this.bill.addItemToBillOfQuantity(itemId,item_quantity,item_disscount);
+    }
+
+    public Map<Integer, Pair<Integer, Double>> getbillOfQuantities() {
+        return this.bill.getbillOfQuantities();
+    }
+
 }

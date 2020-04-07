@@ -69,4 +69,23 @@ public class SupplierController {
         return supplier.getAgreement().getTerms();
     }
 
+    public double getPriceOfItem(int suppId, int index) {
+        return getSuppById(suppId).getPriceOfItem(index);
+    }
+
+    public Boolean checkBillOfQuantity(int suppId) {
+        return getSuppById(suppId).checkBillOfQuantity();
+    }
+
+    public void addItemToBillOfQuantity(int suppId, int itemId, int item_quantity, Double item_disscount) {
+        getSuppById(suppId).addItemToBillOfQuantity(itemId,item_quantity,item_disscount);
+    }
+
+    public Map<Integer, Pair<Integer, Double>> getbillOfQuantities(int suppId) {
+        return getSuppById(suppId).getbillOfQuantities();
+    }
+
+    public String getItemName(int suppId, Integer item) {
+        return getSuppById(suppId).getItemName(item);
+    }
 }
