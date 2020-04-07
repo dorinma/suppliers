@@ -1,7 +1,7 @@
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import javafx.util.Pair;
 
 public class Supplier {
@@ -15,7 +15,7 @@ public class Supplier {
     private List<Pair<Item, Integer>> items;
     private Agreement agreement;
 
-    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items, Map<Integer, Double> agreement) {
+    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items, LinkedHashMap<Integer, Double> agreement) {
         this.id = id;
         this.name = name;
         this.phoneNum = phoneNum;
@@ -27,49 +27,9 @@ public class Supplier {
         this.agreement = new Agreement(agreement);
     }
 
-
     public int getId() { return this.id; }
 
     public Agreement getAgreement() { return this.agreement; }
-
-    /*
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-    public int getBankAccount() {
-        return bankAccount;
-    }
-    public void setBankAccount(int bankAccount) {
-        this.bankAccount = bankAccount;
-    }
-    public String getPayment() {
-        return payment;
-    }
-    public void setPayment(String payment) {
-        this.payment = payment;
-    }
-    public String getSupplyScedule() {
-        return supplySchedule;
-    }
-    public void setSupplyScedule(String supplySchedule) {
-        this.supplySchedule = supplySchedule;
-    }
-    public String getSupplyLocation() {
-        return supplyLocation;
-    }
-*/
 
     public boolean makeOrder(List<ItemInOrder> items) {
         int counter = 0;
@@ -90,14 +50,6 @@ public class Supplier {
         return true;
     }
 
-   /* public double getPriceOfItem(double id){
-        for (int i=0; i< items.size(); i++) {
-            if(items.get(i).getKey().getId() == id)
-                return items.get(i).getKey().getPrice();
-        }
-        return -1;
-    }*/
-
     public void updateBillOfQuantities( Integer itemId, Pair<Integer, Double> quantity_disc) {
         this.agreement.updateBillOfQuantities(itemId,quantity_disc);
     }
@@ -108,5 +60,13 @@ public class Supplier {
 
     public void addItemToAgreement(Integer item_id, Double cost) {
         this.agreement.insertItem(item_id,cost);
+    }
+
+    public List<Item> getItems() {
+        LinkedList items = new LinkedList();
+        for(int i=0; i < this.items.size(); i++){
+            items.add(this.items.get(i));
+        }
+        return items;
     }
 }

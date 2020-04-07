@@ -1,15 +1,13 @@
 import javafx.util.Pair;
-
-import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Agreement {
 
-    private Map<Integer, Double> terms= new HashMap<>();
+    private LinkedHashMap<Integer, Double> terms;
     private BillOfQuantities bill;
 
-    public Agreement(Map<Integer, Double> terms) {
+    public Agreement(LinkedHashMap<Integer, Double> terms) {
         this.terms = terms;
         this.bill = null;
     }
@@ -32,5 +30,11 @@ public class Agreement {
 
     public void insertItem(Integer item_id, Double cost) {
         terms.put(item_id,cost);
+    }
+
+    public LinkedHashMap<Integer, Double> getTerms() { return this.terms; }
+
+    public void setPrice(int id, double newPrice) {
+        terms.replace(id, newPrice);
     }
 }

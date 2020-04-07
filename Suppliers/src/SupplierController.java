@@ -1,24 +1,23 @@
 import javafx.util.Pair;
+import sun.awt.image.ImageWatched;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class SupplierController {
     private List<Supplier> suppliers;
-    private static SupplierController sp_instance=null;
+    private static SupplierController sp_instance = null;
 
-
-    public static SupplierController getSupplierController()
-    {
-        if(sp_instance==null)
-        {
-            sp_instance=new  SupplierController();
-        }
-            return sp_instance;
+    public static SupplierController getSupplierController() {
+        if (sp_instance == null)
+            sp_instance = new SupplierController();
+        return sp_instance;
     }
 
     private SupplierController() {
-      this.suppliers= new LinkedList<>();
+      this.suppliers = new LinkedList<>();
     }
 
     public Supplier getSuppById(int id) {
@@ -29,25 +28,22 @@ public class SupplierController {
         return null;
     }
 
-    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items,Map<Integer, Double> agreement) {
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items, LinkedHashMap<Integer, Double> agreement) {
         Supplier sup = new Supplier(id, name, phoneNum, bankAccount, payment, supplySchedule, supplyLocation, items,agreement);
         this.suppliers.add(sup);
     }
 
     public void addBillOfQuantities(int supplierId,Map<Integer, Pair<Integer, Double>> bill) {
-        if(getSuppById(supplierId)!=null)
-        {
+        if (getSuppById(supplierId) != null) {
             getSuppById(supplierId).getAgreement().addBillOfQuantities(bill);
         }
     }
-    public void addItemToAgreement(Integer supp_id ,Integer item_id,Double cost)
-    {
+
+    public void addItemToAgreement(Integer supp_id ,Integer item_id,Double cost){
         getSuppById(supp_id).addItemToAgreement(item_id,cost);
     }
 
-
     public void insertBillOfQuantities(int supplierId, Integer itemId, Pair<Integer, Double> quantity_disc) {
-
         if(getSuppById(supplierId)!=null)
         {
             getSuppById(supplierId).getAgreement().insertBillOfQuantities(itemId,quantity_disc);
@@ -61,11 +57,16 @@ public class SupplierController {
        }
     }
 
-
     public void deleteBillOfQuantities(int supplierId, Integer itemId) {
         if(getSuppById(supplierId)!=null)
         {
             getSuppById(supplierId).deleteBillOfQuantities(itemId);
         }
     }
+
+    public LinkedHashMap<Integer, Double> showSuppItems(int suppId){
+        Supplier supplier = getSuppById(suppId);
+        return supplier.getAgreement().getTerms();
+    }
+
 }

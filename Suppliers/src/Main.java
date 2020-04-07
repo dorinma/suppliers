@@ -5,11 +5,19 @@ import java.util.*;
 import java.util.List;
 
 public class Main {
+    static FacadeController fc = FacadeController.getFacadeController();
+
     public static void main(String[] args) {
-        String choice = "", temp = "";
-        boolean exit = false, backToMenu = false;
-        FacadeController fc = FacadeController.getFacadeController();
+        boolean exit;
         System.out.println("Hello!");
+        do {
+            exit = displayMainMenu();
+        } while (!exit);
+    }
+
+    private static boolean displayMainMenu(){
+        boolean exit = false;
+        String choice;
         do {
             System.out.println("Please choose a function:");
             System.out.println("1. Add Supplier");
@@ -35,13 +43,13 @@ public class Main {
                     exit = true;
                     break;
             }
-        } while (!exit);
-
+        }while (!exit);
+        return true;
     }
 
     private static void addItems(List<Pair<Item, Integer>> items) {
         Scanner scanner = new Scanner(System.in);
-        String temp = "";
+        String temp;
         System.out.print("Item's identifier: ");
         temp = scanner.nextLine();
         int itemId = Integer.parseInt(temp);
@@ -57,9 +65,8 @@ public class Main {
         System.out.print("Insert more items? [Y/N]");
     }
 
-    private static int addSupplier(int supplierIdCounter)
-    {
-        String temp = "";
+    private static int addSupplier(int supplierIdCounter){
+        String temp;
         Scanner scanner = new Scanner(System.in);
         System.out.print("Supplier's name: ");
         String suppName = scanner.nextLine();
@@ -77,13 +84,13 @@ public class Main {
 
         List<Pair<Item, Integer>> items = new LinkedList();
 
-        System.out.println("Insert supplier's items? [Y/N]");
+        System.out.print("Insert supplier's items? [Y/N]");
         String addItems = scanner.nextLine();
         while (addItems.equals("Y") | addItems.equals("y")) {
             addItems(items);
             addItems = scanner.nextLine();
         }
-        HashMap agreement = new HashMap();
+        LinkedHashMap agreement = new LinkedHashMap();
         if(items.size() > 0) {
             System.out.println("Please insert supplier's agreement (for each item insert it's cost).");
             for (int i = 0; i < items.size(); i++) {
@@ -93,67 +100,121 @@ public class Main {
                 agreement.put(items.get(i).getKey(), itemPrice);
             }
         }
-        //add bill of quantities
-        FacadeController.getFacadeController().supplierController.addSupplier(supplierIdCounter, suppName, suppPhone, suppBankAccount, suppPayment,
+        //TODO add bill of quantities
+        fc.supplierController.addSupplier(supplierIdCounter, suppName, suppPhone, suppBankAccount, suppPayment,
                 suppSchedule, suppLocation, items, agreement);
         System.out.println("Supplier added successfully. Id is: " + supplierIdCounter);
         return supplierIdCounter++;
 
     }
 
-    private static void manageSupplier()
-    {
-        boolean backToMenu=false;
-        String temp = "";
-        Scanner scanner = new Scanner(System.in);
-        String choice="";
+    private static void manageSupplier(){
+        boolean backToMainMenu = false, backToManageSupplierMenu = false;
+        //String temp, choice;
+        //Scanner scanner = new Scanner(System.in);
         do{
-            System.out.print("Supplier's id: ");
-            temp = scanner.nextLine();
-            int suppId = Integer.parseInt(temp);
-            if(FacadeController.getFacadeController().supplierController.getSuppById(suppId) != null) {
-                System.out.println("Please choose a function:");
-                System.out.println("1. Add items");
-                System.out.println("2. Edit agreement");
-                System.out.println("3. Add bill of quantities");
-                System.out.println("4. Edit bill of quantities");
-                System.out.println("5. Main menu");
-                System.out.print("Option: ");
-                choice = scanner.nextLine();  // Read user input
-                switch (choice) {
-                    case "1":
-                        List<Pair<Item, Integer>> items = new LinkedList();
-                         String addItems = "Y";
-                        int index = items.size();
-                        while (addItems.equals("Y") | addItems.equals("y")) {
-                            addItems(items);
-                            addItems = scanner.nextLine();
-                        }
-                        if (items.size() > 0) {
-                            System.out.println("Please insert supplier's agreement (for each item insert it's cost).");
-                            for (int i = index; i < items.size(); i++) {
-                                System.out.print(items.get(i).getKey().getName() + ": ");
-                                temp = scanner.nextLine();
-                                double itemPrice = Integer.parseInt(temp);
-                                FacadeController.getFacadeController().supplierController.addItemToAgreement(suppId, items.get(i).getKey().getId(), itemPrice);
-                            }
-                        }
-                        break;
-                    case "2":
-                        break;
-                    case "3":
-                        break;
-                    case "4":
-                        break;
-                    case "5":
-                        backToMenu = true;
-                        break;
-                }
-            }
-        }while (!backToMenu);
+            backToManageSupplierMenu = displayManageSupplierMenu();
+        }while (!backToManageSupplierMenu);
+        displayMainMenu();
     }
 
-    private static void addOrder()
-    {}
+    private static boolean displayManageSupplierMenu(){
+        String temp, choice;
+        boolean backToManageSupplierMenu = false;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Supplier's id: ");
+        temp = scanner.nextLine();
+        int suppId = Integer.parseInt(temp);
+        if(fc.supplierController.getSuppById(suppId) != null) {
+            System.out.println("\nPlease choose a function:");
+            System.out.println("1. Add items");
+            System.out.println("2. Edit agreement");
+            System.out.println("3. Add bill of quantities");
+            System.out.println("4. Edit bill of quantities");
+            System.out.println("5. Main menu");
+            System.out.print("Option: ");
+            choice = scanner.nextLine();  // Read user input
+            switch (choice) {
+                case "1": //Add items
+                    List<Pair<Item, Integer>> items = new LinkedList();
+                    String addItems = "Y";
+                    int index = items.size();
+                    while (addItems.equals("Y") | addItems.equals("y")) {
+                        addItems(items);
+                        addItems = scanner.nextLine();
+                    }
+                    if (items.size() > 0) {
+                        System.out.println("Please insert supplier's agreement (for each item insert it's cost).");
+                        for (int i = index; i < items.size(); i++) {
+                            System.out.print(items.get(i).getKey().getName() + ": ");
+                            temp = scanner.nextLine();
+                            double itemPrice = Integer.parseInt(temp);
+                            fc.supplierController.addItemToAgreement(suppId, items.get(i).getKey().getId(), itemPrice);
+                        }
+                    }
+                    break;
+                case "2": //Edit agreement
+                    String toContinue;
+                    do {
+                        toContinue = editAgreement(suppId);
+                    }while (toContinue.equals("Y") | toContinue.equals("y"));
+                    backToManageSupplierMenu = true;
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    backToMainMenu = true;
+                    break;
+            }
+        }
+        return backToManageSupplierMenu;
+    }
+
+    private static void displayItems(int suppId) {
+        LinkedHashMap<Integer, Double> terms = fc.supplierController.showSuppItems(suppId);
+        for(int i=0; i<terms.size(); i++) {
+            String itemName = fc.supplierController.getSuppById(suppId).getItems().get(i).getName();
+            String itemDesc = fc.supplierController.getSuppById(suppId).getItems().get(i).getDescription();
+            double itemPrice = terms.get(fc.supplierController.getSuppById(suppId).getItems().get(i).getId());
+            System.out.print(i + ". " + itemName + ", ");
+            if(itemDesc.length() > 0)
+                System.out.print(itemDesc + ", ");
+            System.out.print(itemPrice + "NIS\n");
+        }
+    }
+
+    private static String editAgreement(int suppId){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nChoose the item it's price you wish to change.");
+        LinkedHashMap<Integer, Double> terms = fc.supplierController.showSuppItems(suppId);
+        displayItems(suppId);
+
+        System.out.print("Item's number: ");
+        int itemNum = scanner.nextInt();
+        int itemId = new ArrayList<>(terms.keySet()).get(itemNum);
+        for(int i=0; i<fc.supplierController.getSuppById(suppId).getItems().size(); i++){
+            if(fc.supplierController.getSuppById(suppId).getItems().get(i).getId() == itemId){
+                String itemName = fc.supplierController.getSuppById(suppId).getItems().get(i).getName();
+                String itemDesc = fc.supplierController.getSuppById(suppId).getItems().get(i).getName();
+                double itemPrice = terms.get(itemId);
+
+                System.out.print(itemName + ", ");
+                if(itemDesc.length() > 0)
+                    System.out.print(itemDesc + ", ");
+                System.out.print(itemPrice + "NIS\n");
+                System.out.print("New price: ");
+                double newPrice = scanner.nextDouble();
+                fc.supplierController.getSuppById(suppId).getAgreement().setPrice(itemId, newPrice);
+            }
+        }
+        System.out.print("Price changed successfully. More items to update? [Y/N] ");
+        return scanner.nextLine();
+    }
+
+    private static void addOrder(){
+
+    }
 
 }

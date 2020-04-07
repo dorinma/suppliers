@@ -6,17 +6,16 @@ import java.util.List;
 public class OrderController {
 
     List<Order> orders;
-    private static OrderController order_sp=null;
+    private static OrderController order_sp = null;
 
     private OrderController()
     {
         this.orders= new LinkedList<>();
     }
 
-    public static OrderController getOrderController()
-    {
-        if(order_sp==null)
-            order_sp=new OrderController();
+    public static OrderController getOrderController() {
+        if (order_sp == null)
+            order_sp = new OrderController();
         return order_sp;
     }
 
