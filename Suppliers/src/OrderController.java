@@ -29,4 +29,16 @@ public class OrderController {
        }
        else return false;
     }
+
+    public int getOrdersSize() {
+        return this.orders.size();
+    }
+
+    public List<Pair<Integer, Integer>> getItemsInOrderById(int i) {
+        return this.orders.get(i).getItemsInOrderById();
+    }
+
+    public int getSupplierIdOfOrder(int i) {
+        return this.orders.get(i).getSupplierIdOfOrder();
+    }
 }

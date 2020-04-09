@@ -42,7 +42,7 @@ public class Supplier {
         if (counter != items.size()) return false;
         for (int i = 0; i < items.size(); i++) {
             if (this.items.get(i).getKey().getId() == items.get(i).getItemId()) {
-                Pair<Item, Integer> p = new Pair(this.items.get(i), this.items.get(i).getValue() - items.get(i).getQuantity());
+                Pair<Item, Integer> p = new Pair(this.items.get(i).getKey(), (this.items.get(i).getValue() - items.get(i).getQuantity()));
                 this.items.remove(i);
                 this.items.add(p);
             }
@@ -93,5 +93,17 @@ public class Supplier {
             break;
         }
         return "";
+    }
+
+    public String getItemNameByIndex(int i) {
+        return this.items.get(i).getKey().getName();
+    }
+
+    public String getItemDescByIndex(int i) {
+        return this.items.get(i).getKey().getDescription();
+    }
+
+    public int getItemIdByIndex(int i) {
+        return this.items.get(i).getKey().getId();
     }
 }

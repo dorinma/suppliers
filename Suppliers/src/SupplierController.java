@@ -88,4 +88,16 @@ public class SupplierController {
     public String getItemName(int suppId, Integer item) {
         return getSuppById(suppId).getItemName(item);
     }
+
+    public String getItemNameByIndex(int suppId, int i) {
+        return getSuppById(suppId).getItemNameByIndex(i);
+    }
+
+    public String getItemDescByIndex(int suppId, int i) {
+        return getSuppById(suppId).getItemDescByIndex(i);
+    }
+
+    public int getItemIdByIndex(int suppId, int i) {
+        return getSuppById(suppId).getItemIdByIndex(i);
+    }
 }

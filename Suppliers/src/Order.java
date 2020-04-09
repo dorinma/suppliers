@@ -29,4 +29,17 @@ public class Order {
     public boolean makeOrder() {
         return supplier.makeOrder(items);
     }
+
+    public List<Pair<Integer, Integer>> getItemsInOrderById() {
+        List<Pair<Integer, Integer>> list =new LinkedList<>();
+        for(int i =0 ; i<items.size();i++)
+        {
+            list.add(new Pair(items.get(i).getItemId(),items.get(i).getQuantity()));
+        }
+        return list;
+    }
+
+    public int getSupplierIdOfOrder() {
+        return this.supplier.getId();
+    }
 }
