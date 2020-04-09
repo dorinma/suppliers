@@ -23,8 +23,8 @@ public class BillOfQuantities {
         bill.remove(itemId);
     }
 
-    public void addItemToBillOfQuantity(int itemId, int item_quantity, Double item_disscount) {
-        Pair<Integer,Double> p = new Pair(item_quantity,item_disscount);
+    public void addItemToBillOfQuantities(int itemId, int itemQuantity, Double itemDiscount) {
+        Pair<Integer,Double> p = new Pair(itemQuantity,itemDiscount);
         this.bill.put(itemId,p);
     }
 

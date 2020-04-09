@@ -78,8 +78,8 @@ public class Supplier {
         return this.agreement.checkBillOfQuantity();
     }
 
-    public void addItemToBillOfQuantity(int itemId, int item_quantity, Double item_disscount) {
-        this.agreement.addItemToBillOfQuantity(itemId,item_quantity,item_disscount);
+    public void addItemToBillOfQuantities(int itemId, int itemQuantity, Double itemDiscount) {
+        this.agreement.addItemToBillOfQuantities(itemId,itemQuantity,itemDiscount);
     }
 
     public Map<Integer, Pair<Integer, Double>> getbillOfQuantities() {

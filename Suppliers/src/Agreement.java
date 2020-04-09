@@ -47,8 +47,8 @@ public class Agreement {
         return true;
     }
 
-    public void addItemToBillOfQuantity(int itemId, int item_quantity, Double item_disscount) {
-        this.bill.addItemToBillOfQuantity(itemId,item_quantity,item_disscount);
+    public void addItemToBillOfQuantities(int itemId, int itemQuantity, Double itemDiscount) {
+        this.bill.addItemToBillOfQuantities(itemId,itemQuantity,itemDiscount);
     }
 
     public Map<Integer, Pair<Integer, Double>> getbillOfQuantities() {

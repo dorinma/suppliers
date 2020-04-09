@@ -77,8 +77,8 @@ public class SupplierController {
         return getSuppById(suppId).checkBillOfQuantity();
     }
 
-    public void addItemToBillOfQuantity(int suppId, int itemId, int item_quantity, Double item_disscount) {
-        getSuppById(suppId).addItemToBillOfQuantity(itemId,item_quantity,item_disscount);
+    public void addItemToBillOfQuantities(int suppId, int itemId, int itemQuantity, Double itemDiscount) {
+        getSuppById(suppId).addItemToBillOfQuantities(itemId,itemQuantity,itemDiscount);
     }
 
     public Map<Integer, Pair<Integer, Double>> getbillOfQuantities(int suppId) {
