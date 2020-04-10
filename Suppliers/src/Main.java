@@ -66,14 +66,14 @@ public class Main {
                 int supplierId = fc.orderController.getSupplierIdOfOrder(i);
                 System.out.println("Supplier's id: " + supplierId + ", order number: " + i);
                 for (int j = 0; j < list.size(); j++) {
-                    System.out.println("Item's id :" + list.get(i).getKey() + ", quantity: " + list.get(i).getValue());
+                    System.out.println("Item's id :" + list.get(j).getKey() + ", quantity: " + list.get(j).getValue());
                 }
                 System.out.println();
             }
         }
     }
 
-    private static void addItems(List<Pair<Item, Integer>> items) {
+    private static void addItems(int suppId) {
         Scanner scanner = new Scanner(System.in);
         String temp;
         System.out.print("Item's identifier: ");
@@ -86,8 +86,9 @@ public class Main {
         System.out.print("Quantity of this item: ");
         temp = scanner.nextLine();
         int itemQuantity = Integer.parseInt(temp);
-        Item item = new Item(itemId, itemName, itemDescription);
-        items.add(new Pair(item, itemQuantity));
+        fc.supplierController.addItemToSupplier(suppId,itemId,itemName,itemDescription,itemQuantity);
+       // Item item = new Item(itemId, itemName, itemDescription);
+        //items.add(new Pair(item, itemQuantity));
         System.out.print("Insert more items? [Y/N] ");
     }
 
@@ -108,26 +109,28 @@ public class Main {
         System.out.print("Supply location: ");
         String suppLocation = scanner.nextLine();
 
-        List<Pair<Item, Integer>> items = new LinkedList();
+       // List<Pair<Item, Integer>> items = new LinkedList();
+        fc.supplierController.addSupplier(supplierIdCounter, suppName, suppPhone, suppBankAccount, suppPayment,
+                suppSchedule, suppLocation);
 
         System.out.print("Insert supplier's items? [Y/N] ");
         String addItems = scanner.nextLine();
         while (addItems.equals("Y") | addItems.equals("y")) {
-            addItems(items);
+            addItems(supplierIdCounter);
             addItems = scanner.nextLine();
         }
+        int size =fc.supplierController.getItemsListSize(supplierIdCounter);
         LinkedHashMap agreement = new LinkedHashMap();
-        if(items.size() > 0) {
+        if(size > 0) {
             System.out.println("Please insert supplier's agreement (for each item insert it's cost).");
-            for (int i = 0; i < items.size(); i++) {
-                System.out.print(items.get(i).getKey().getName() + ": ");
+            for (int i = 0; i < size; i++) {
+                System.out.print(fc.supplierController.getItemNameByIndex(supplierIdCounter,i) + ": ");
                 temp = scanner.nextLine();
                 double itemPrice = Integer.parseInt(temp);
-                agreement.put(items.get(i).getKey().getId(), itemPrice);
+                fc.supplierController.addItemToAgreement(supplierIdCounter,fc.supplierController.getItemIdByIndex(supplierIdCounter,i),itemPrice);
+                //agreement.put(items.get(i).getKey().getId(), itemPrice);
             }
         }
-        fc.supplierController.addSupplier(supplierIdCounter, suppName, suppPhone, suppBankAccount, suppPayment,
-                suppSchedule, suppLocation, items, agreement);
         System.out.println("Supplier added successfully. Id is: " + supplierIdCounter);
         return supplierIdCounter++;
 
@@ -155,20 +158,21 @@ public class Main {
             choice = scanner.nextLine();
             switch (choice) {
                 case "1": //Add items
-                    List<Pair<Item, Integer>> items = new LinkedList();
                     String addItems = "Y";
-                    int index = items.size();
+                    int counter=fc.supplierController.getItemsListSize(suppId);
+                    int size=counter;
                     while (addItems.equals("Y") | addItems.equals("y")) {
-                        addItems(items);
+                        addItems(suppId);
                         addItems = scanner.nextLine();
+                        size++;
                     }
-                    if (items.size() > 0) {
+                    if (size > 0) {
                         System.out.println("Please insert supplier's agreement (for each item insert it's cost).");
-                        for (int i = index; i < items.size(); i++) {
-                            System.out.print(items.get(i).getKey().getName() + ": ");
+                        for (int i = counter; i < size; i++) {
+                            System.out.print(fc.supplierController.getItemNameByIndex(suppId,i)+ ": ");
                             temp = scanner.nextLine();
                             double itemPrice = Integer.parseInt(temp);
-                            fc.supplierController.addItemToAgreement(suppId, items.get(i).getKey().getId(), itemPrice);
+                            fc.supplierController.addItemToAgreement(suppId,fc.supplierController.getItemIdByIndex(suppId,i), itemPrice);
                         }
                     }
                     break;
@@ -270,9 +274,9 @@ public class Main {
         int itemNum = scanner.nextInt() - 1;
         int itemId = new ArrayList<>(terms.keySet()).get(itemNum);
         for(int i=0; i<fc.supplierController.getSuppById(suppId).getItems().size(); i++){
-            if(fc.supplierController.getSuppById(suppId).getItems().get(i).getId() == itemId){
-                String itemName = fc.supplierController.getSuppById(suppId).getItems().get(i).getName();
-                String itemDesc = fc.supplierController.getSuppById(suppId).getItems().get(i).getDescription();
+            if(fc.supplierController.getItemIdByIndex(suppId,i) == itemId){
+                String itemName = fc.supplierController.getItemNameByIndex(suppId,i);
+                String itemDesc = fc.supplierController.getItemDescByIndex(suppId,i);
                 double itemPrice = terms.get(itemId);
                 System.out.print(itemName + ", ");
                 if(itemDesc.length() > 0)
@@ -280,7 +284,7 @@ public class Main {
                 System.out.print(itemPrice + "NIS\n");
                 System.out.print("New price: ");
                 double newPrice = scanner.nextDouble();
-                fc.supplierController.getSuppById(suppId).getAgreement().setPrice(itemId, newPrice);
+                fc.supplierController.getSuppById(suppId).getAgreement().setPrice(itemId, newPrice);//TODO CAHNGE
             }
         }
         System.out.print("Price changed successfully. More items to update? [Y/N] ");

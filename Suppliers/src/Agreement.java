@@ -1,4 +1,6 @@
 import javafx.util.Pair;
+
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -7,8 +9,8 @@ public class Agreement {
     private LinkedHashMap<Integer, Double> terms;
     private BillOfQuantities bill;
 
-    public Agreement(LinkedHashMap<Integer, Double> terms) {
-        this.terms = terms;
+    public Agreement() {
+        this.terms = new LinkedHashMap<>();
         this.bill = null;
     }
 

@@ -20,8 +20,8 @@ public class FacadeController {
         return fc_instance;
     }
 
-    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items, LinkedHashMap<Integer, Double> agreement) {
-        supplierController.addSupplier(id, name, phoneNum, bankAccount, payment, supplySchedule, supplyLocation, items, agreement);
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation) {
+        supplierController.addSupplier(id, name, phoneNum, bankAccount, payment, supplySchedule, supplyLocation);
     }
 
     public void addBillOfQuantities (int supplierId,Map<Integer, Pair<Integer, Double>> bill ) {

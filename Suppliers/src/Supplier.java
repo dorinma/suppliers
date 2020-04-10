@@ -15,7 +15,7 @@ public class Supplier {
     private List<Pair<Item, Integer>> items;
     private Agreement agreement;
 
-    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items, LinkedHashMap<Integer, Double> agreement) {
+    public Supplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation) {
         this.id = id;
         this.name = name;
         this.phoneNum = phoneNum;
@@ -23,8 +23,8 @@ public class Supplier {
         this.payment = payment;
         this.supplySchedule = supplySchedule;
         this.supplyLocation = supplyLocation;
-        this.items = items;
-        this.agreement = new Agreement(agreement);
+        this.items = new LinkedList<>();
+        this.agreement = new Agreement();
     }
 
     public int getId() { return this.id; }
@@ -105,5 +105,14 @@ public class Supplier {
 
     public int getItemIdByIndex(int i) {
         return this.items.get(i).getKey().getId();
+    }
+
+    public void addItemsToSupplier(int itemId, String itemName, String itemDescription, int itemQuantity) {
+            Item item = new Item(itemId,itemName,itemDescription);
+            this.items.add(new Pair(item,itemQuantity));
+    }
+
+    public int getItemsListSize() {
+        return this.items.size();
     }
 }

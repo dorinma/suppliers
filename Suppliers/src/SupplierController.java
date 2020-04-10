@@ -28,8 +28,8 @@ public class SupplierController {
         return null;
     }
 
-    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation, List<Pair<Item, Integer>> items, LinkedHashMap<Integer, Double> agreement) {
-        Supplier sup = new Supplier(id, name, phoneNum, bankAccount, payment, supplySchedule, supplyLocation, items,agreement);
+    public void addSupplier(int id, String name, String phoneNum, int bankAccount, String payment, String supplySchedule, String supplyLocation) {
+        Supplier sup = new Supplier(id, name, phoneNum, bankAccount, payment, supplySchedule, supplyLocation);
         this.suppliers.add(sup);
     }
 
@@ -99,5 +99,13 @@ public class SupplierController {
 
     public int getItemIdByIndex(int suppId, int i) {
         return getSuppById(suppId).getItemIdByIndex(i);
+    }
+
+    public void addItemToSupplier(int suppId, int itemId, String itemName, String itemDescription, int itemQuantity) {
+        this.getSuppById(suppId).addItemsToSupplier(itemId,itemName,itemDescription,itemQuantity);
+    }
+
+    public int getItemsListSize(int suppId) {
+        return this.getSuppById(suppId).getItemsListSize();
     }
 }
